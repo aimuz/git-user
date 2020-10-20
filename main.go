@@ -21,7 +21,7 @@ func main() {
 	}
 	setUsageTemplate(rootCmd)
 	globalFlags := rootCmd.PersistentFlags()
-	globalFlags.StringVar(&dataPath, "data", path.Dir(dataPath), ``)
+	globalFlags.StringVar(&dataPath, "data", dataPath, ``)
 	if err := initCommand(rootCmd); err != nil {
 		panic(err)
 	}
@@ -37,16 +37,13 @@ func initCommand(cmd *cobra.Command) error {
 	if err != nil {
 		return err
 	}
-	file, err := os.Create(dataPath)
+	file, err := os.OpenFile(dataPath, os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		return err
 	}
 	err = yaml.NewDecoder(file).Decode(&users)
-	if err == io.EOF {
+	if err != nil && err != io.EOF {
 		err = nil
-	}
-	if err != nil {
-		return err
 	}
 	cmd.AddCommand(
 		users.CreateUserCommand(),
