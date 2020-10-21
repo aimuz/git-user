@@ -9,6 +9,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"path"
 )
 
 const useExample = "git user use example"
@@ -54,7 +55,10 @@ func (u Users) UseUserCommand() *cobra.Command {
 			if err != nil {
 				return
 			}
-			_, _ = fmt.Fprintln(writer, "User set successfully")
+			_, _ = fmt.Fprintf(writer,
+				"%s setup successfully\n",
+				path.Base(gitRepoPath),
+			)
 		},
 	}
 	return cmd
