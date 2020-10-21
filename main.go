@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"strings"
 )
 
 var dataPath = os.Getenv("HOME") + "/.config/git-user/user.yaml"
@@ -15,7 +16,8 @@ var users = Users{}
 func main() {
 	rootCmd := &cobra.Command{
 		Use:     "user [command] [flags]",
-		Example: "git multi user management",
+		Short:   "git multi user management",
+		Example: strings.Join([]string{createExample, listExample, useExample}, "\n "),
 		RunE:    run,
 		Version: "v0.1.0",
 	}

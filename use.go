@@ -11,6 +11,8 @@ import (
 	"os/exec"
 )
 
+const useExample = "git user use example"
+
 func (u Users) UseUserCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "use [title]",

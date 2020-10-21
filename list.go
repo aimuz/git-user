@@ -7,6 +7,8 @@ import (
 	"text/tabwriter"
 )
 
+const listExample = "git user list"
+
 func (u Users) ListUserCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:     "list",

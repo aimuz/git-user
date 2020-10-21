@@ -6,12 +6,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const createExample = "git user create --title example --user example --email example@example.com"
+
 func (u Users) CreateUserCommand() *cobra.Command {
 	var title, username, email string
 	cmd := &cobra.Command{
 		Use:     "create",
 		Aliases: []string{"a"},
-		Example: "git user create --title example --user example --email example@example.com",
+		Example: createExample,
 		Short:   "create a new git user",
 		Long: `create a new git user, 
 The mailbox will be used as the unique identifier`,
