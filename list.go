@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/spf13/cobra"
 	"os"
 	"text/tabwriter"
+
+	"github.com/spf13/cobra"
 )
 
 const listExample = "git user list"

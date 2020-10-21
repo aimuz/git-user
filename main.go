@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/spf13/cobra"
-	"gopkg.in/yaml.v2"
 	"io"
 	"os"
 	"path"
 	"strings"
+
+	"github.com/spf13/cobra"
+	"gopkg.in/yaml.v2"
 )
 
 var dataPath = os.Getenv("HOME") + "/.config/git-user/user.yaml"

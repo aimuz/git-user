@@ -3,11 +3,12 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/spf13/cobra"
 	"io"
 	"os"
 	"os/exec"
 	"path"
+
+	"github.com/spf13/cobra"
 )
 
 const clearExample = "git user create --title example --user example --email example@example.com"

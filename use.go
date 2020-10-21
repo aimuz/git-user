@@ -3,12 +3,13 @@ package main
 import (
 	"bytes"
 	"fmt"
-	_ "github.com/go-git/go-git/v5"
-	"github.com/spf13/cobra"
 	"io"
 	"os"
 	"os/exec"
 	"path"
+
+	_ "github.com/go-git/go-git/v5"
+	"github.com/spf13/cobra"
 )
 
 const useExample = "git user use example"
