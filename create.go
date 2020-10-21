@@ -46,6 +46,6 @@ The mailbox will be used as the unique identifier`,
 	flags.StringVar(&user.Name, "user", user.Name, "git user name")
 	flags.StringVar(&user.Email, "email", user.Email, "git user email")
 	flags.StringVarP(&user.IdentityFile, "identity_file", "i", user.IdentityFile,
-		"Selects a file from which the identity (private key) for public key authentication is read")
+		"The certificate corresponding to the user. If it is blank, the default value will be used")
 	return cmd
 }
