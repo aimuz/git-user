@@ -13,7 +13,7 @@ import (
 
 func (u Users) UseUserCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:     "use",
+		Use:     "use [title]",
 		Aliases: []string{"u"},
 		Short:   "Switch the current repo git user",
 		Long:    "Switch the current repo git user",
