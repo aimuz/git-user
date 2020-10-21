@@ -54,6 +54,7 @@ Use "user [command] --help" for more information about a command.
 Help:
 
 ```bash
+$ git user create --help 
 Usage:
  git user create [flags]
 
@@ -74,13 +75,16 @@ Global Flags:
 ```
 
 ```bash
-git user create --title example --user example --email example@example.com
+$ git user create --title example --user example --email example@example.com
+Successfully created example user
 ```
 
 ### List All Users
 
 ```bash
-git user list
+$ git user list                                                             
+TITLE   USER            EMAIL                   
+example example         example@example.com     
 ```
 
 ### Switch Current Repository User
@@ -88,5 +92,7 @@ git user list
 `git user use [title]`
 
 ```bash
-git user use example
+$ git user use example 
+User set successfully
+
 ```
