@@ -51,6 +51,7 @@ func initCommand(cmd *cobra.Command) error {
 		users.CreateUserCommand(),
 		users.ListUserCommand(),
 		users.UseUserCommand(),
+		users.CleanUserCommand(),
 	)
 	return nil
 }
