@@ -8,7 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const createExample = "git user create --title example --user example --email example@example.com"
+const createExample = `git user create --title example --user example --email example@example.com
+ git user create --title example --user example --email example@example.com -i ~/.ssh/id_rsa`
 
 func (u Users) CreateUserCommand() *cobra.Command {
 	var user User
