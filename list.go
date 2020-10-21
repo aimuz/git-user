@@ -14,9 +14,7 @@ func (u Users) ListUserCommand() *cobra.Command {
 		Short:   "list all git users",
 		Long:    "list all git users",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			// initialize tabwriter
-			w := new(tabwriter.Writer)
-			// minwidth, tabwidth, padding, padchar, flags
+			w := &tabwriter.Writer{}
 			w.Init(os.Stdout, 8, 8, 0, '\t', 0)
 			defer w.Flush()
 			_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t\n", "TITLE", "USER", "EMAIL")
