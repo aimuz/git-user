@@ -68,7 +68,7 @@ Aliases:
 Examples:
  {{.Example}}{{end}}{{if .HasAvailableSubCommands}}
 
-Available Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
+Commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
  git user {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableLocalFlags}}
 
 Flags:
