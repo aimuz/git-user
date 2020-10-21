@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/go-git/go-git/v5"
 	_ "github.com/go-git/go-git/v5"
 	"github.com/spf13/cobra"
 	"io"
@@ -29,6 +28,7 @@ func (u Users) UseUserCommand() *cobra.Command {
 				_, _ = writer.Write(b)
 				return
 			}
+			gitRepoPath := string(bytes.Trim(b, "\n"))
 			if len(args) == 0 {
 				_, _ = fmt.Fprintln(writer, "args is empty")
 				return
@@ -38,21 +38,28 @@ func (u Users) UseUserCommand() *cobra.Command {
 				_, _ = fmt.Fprintf(writer, "%s is not found\n", args[0])
 				return
 			}
-			gitRepoPath := string(bytes.Trim(b, "\n"))
-			repo, err := git.PlainOpen(gitRepoPath)
+			setConfig := func() error {
+				subCmdArgs := map[string][]string{
+					"user.name":       {"config", "user.name", user.Name},
+					"user.email":      {"config", "user.email", user.Email},
+					"core.sshCommand": {"config", "--unset", "core.sshCommand"},
+				}
+				if len(user.IdentityFile) > 0 {
+					subCmdArgs["core.sshCommand"] = []string{"config", "core.sshCommand", fmt.Sprintf(`ssh -i %s`, user.IdentityFile)}
+				}
+				var cmd *exec.Cmd
+				for s, strings := range subCmdArgs {
+					cmd = exec.Command(s, strings...)
+					_, err = cmd.CombinedOutput()
+					if err != nil {
+						return err
+					}
+				}
+				return nil
+			}
+			err = setConfig()
 			if err != nil {
 				_, _ = fmt.Fprintln(writer, err)
-				return
-			}
-			cfg, err := repo.Config()
-			if err != nil {
-				_, _ = fmt.Fprintln(writer, err)
-				return
-			}
-			cfg.User.Name = user.Name
-			cfg.User.Email = user.Email
-			err = repo.SetConfig(cfg)
-			if err != nil {
 				return
 			}
 			_, _ = fmt.Fprintf(writer,

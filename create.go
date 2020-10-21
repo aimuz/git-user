@@ -4,12 +4,14 @@ import (
 	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 const createExample = "git user create --title example --user example --email example@example.com"
 
 func (u Users) CreateUserCommand() *cobra.Command {
-	var title, username, email string
+	var user = User{}
+	var title string
 	cmd := &cobra.Command{
 		Use:     "create",
 		Aliases: []string{"a"},
@@ -18,16 +20,19 @@ func (u Users) CreateUserCommand() *cobra.Command {
 		Long: `create a new git user, 
 The mailbox will be used as the unique identifier`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if len(username) == 0 || len(email) == 0 {
+			if len(user.Name) == 0 || len(user.Email) == 0 {
 				return errors.New("username or email cannot be empty")
 			}
 			if len(title) == 0 {
-				title = username
+				title = user.Name
 			}
-			u[title] = User{
-				Name:  username,
-				Email: email,
+			if len(user.IdentityFile) > 0 {
+				_, err := os.Stat(user.IdentityFile)
+				if err != nil {
+					return err
+				}
 			}
+			u[title] = user
 			err := u.Update()
 			if err != nil {
 				return err
@@ -38,7 +43,9 @@ The mailbox will be used as the unique identifier`,
 	}
 	flags := cmd.Flags()
 	flags.StringVar(&title, "title", title, "if it is empty, username will be used")
-	flags.StringVar(&username, "user", username, "git user name")
-	flags.StringVar(&email, "email", email, "git user email")
+	flags.StringVar(&user.Name, "user", user.Name, "git user name")
+	flags.StringVar(&user.Email, "email", user.Email, "git user email")
+	flags.StringVarP(&user.IdentityFile, "identity_file", "i", user.IdentityFile,
+		"Selects a file from which the identity (private key) for public key authentication is read")
 	return cmd
 }

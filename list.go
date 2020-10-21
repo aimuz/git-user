@@ -20,9 +20,9 @@ func (u Users) ListUserCommand() *cobra.Command {
 			w := &tabwriter.Writer{}
 			w.Init(os.Stdout, 8, 8, 0, '\t', 0)
 			defer w.Flush()
-			_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t\n", "TITLE", "USER", "EMAIL")
+			_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t%s\t\n", "TITLE", "USER", "EMAIL", "IdentityFile")
 			for s, user := range u {
-				_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t\n", s, user.Name, user.Email)
+				_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t%s\t\n", s, user.Name, user.Email, user.IdentityFile)
 			}
 			return nil
 		},

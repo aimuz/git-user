@@ -6,8 +6,9 @@ import (
 )
 
 type User struct {
-	Email string `yaml:"email"`
-	Name  string `yaml:"name"`
+	Email        string `yaml:"email"`
+	Name         string `yaml:"name"`
+	IdentityFile string `yaml:"identity_file"`
 }
 
 type Users map[string]User
