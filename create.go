@@ -11,6 +11,7 @@ func (u Users) CreateUserCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "create",
 		Aliases: []string{"a"},
+		Example: "git user create --title example --user example --email example@example.com",
 		Short:   "create a new git user",
 		Long: `create a new git user, 
 The mailbox will be used as the unique identifier`,

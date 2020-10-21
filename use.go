@@ -15,6 +15,7 @@ func (u Users) UseUserCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "use [title]",
 		Aliases: []string{"u"},
+		Example: "git user use example",
 		Short:   "Switch the current repo git user",
 		Long:    "Switch the current repo git user",
 		Run: func(cmd *cobra.Command, args []string) {

@@ -11,6 +11,7 @@ func (u Users) ListUserCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:     "list",
 		Aliases: []string{"l"},
+		Example: "git user list",
 		Short:   "list all git users",
 		Long:    "list all git users",
 		RunE: func(cmd *cobra.Command, args []string) error {
