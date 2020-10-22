@@ -49,8 +49,8 @@ func (u Users) UseUserCommand() *cobra.Command {
 					subCmdArgs["core.sshCommand"] = []string{"config", "core.sshCommand", fmt.Sprintf(`ssh -i %s`, user.IdentityFile)}
 				}
 				var cmd *exec.Cmd
-				for s, strings := range subCmdArgs {
-					cmd = exec.Command(s, strings...)
+				for _, strings := range subCmdArgs {
+					cmd = exec.Command("git", strings...)
 					_, err = cmd.CombinedOutput()
 					if err != nil {
 						return err

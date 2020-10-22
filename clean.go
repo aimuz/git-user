@@ -15,10 +15,10 @@ const clearExample = "git user create --title example --user example --email exa
 
 func (u Users) CleanUserCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:     "clear",
+		Use:     "clean",
 		Example: clearExample,
-		Short:   "Clear current repo username and email configuration",
-		Long: `Clear current repo username and email configuration,
+		Short:   "Clean current repo username and email configuration",
+		Long: `Clean current repo username and email configuration,
 This clearing will cause the commit information to use the configuration of "$HOME/.gitconfig"`,
 		Run: func(cmd *cobra.Command, args []string) {
 			writer := io.Writer(os.Stdout)
@@ -37,8 +37,8 @@ This clearing will cause the commit information to use the configuration of "$HO
 					"core.sshCommand": {"config", "--unset", "core.sshCommand"},
 				}
 				var cmd *exec.Cmd
-				for s, strings := range subCmdArgs {
-					cmd = exec.Command(s, strings...)
+				for _, strings := range subCmdArgs {
+					cmd = exec.Command("git", strings...)
 					_, err = cmd.CombinedOutput()
 					if err != nil {
 						return err
