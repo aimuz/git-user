@@ -41,9 +41,10 @@ func (u Users) UseUserCommand() *cobra.Command {
 			}
 			setConfig := func() error {
 				subCmdArgs := map[string][]string{
-					"user.name":       {"config", "user.name", user.Name},
-					"user.email":      {"config", "user.email", user.Email},
-					"core.sshCommand": {"config", "--unset", "core.sshCommand"},
+					"user.name":            {"config", "user.name", user.Name},
+					"user.email":           {"config", "user.email", user.Email},
+					"core.sshCommand-temp": {"config", "core.sshCommand", "temp"},
+					"core.sshCommand":      {"config", "--unset", "core.sshCommand"},
 				}
 				if len(user.IdentityFile) > 0 {
 					subCmdArgs["core.sshCommand"] = []string{"config", "core.sshCommand", fmt.Sprintf(`ssh -i %s`, user.IdentityFile)}
@@ -51,8 +52,10 @@ func (u Users) UseUserCommand() *cobra.Command {
 				var cmd *exec.Cmd
 				for _, strings := range subCmdArgs {
 					cmd = exec.Command("git", strings...)
-					_, err = cmd.CombinedOutput()
+					cmd.Env = os.Environ()
+					b, err = cmd.CombinedOutput()
 					if err != nil {
+						fmt.Println(b, err)
 						return err
 					}
 				}

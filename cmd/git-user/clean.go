@@ -32,9 +32,12 @@ This clearing will cause the commit information to use the configuration of "$HO
 
 			setConfig := func() error {
 				subCmdArgs := map[string][]string{
-					"user.name":       {"config", "--unset", "user.name"},
-					"user.email":      {"config", "--unset", "user.email"},
-					"core.sshCommand": {"config", "--unset", "core.sshCommand"},
+					"user.name-temp":       {"config", "user.name", "temp"},
+					"user.name":            {"config", "--unset", "user.name"},
+					"user.email-temp":      {"config", "user.email", "temp@example.com"},
+					"user.email":           {"config", "--unset", "user.email"},
+					"core.sshCommand-temp": {"config", "core.sshCommand", "temp"},
+					"core.sshCommand":      {"config", "--unset", "core.sshCommand"},
 				}
 				var cmd *exec.Cmd
 				for _, strings := range subCmdArgs {
