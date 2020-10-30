@@ -1,4 +1,4 @@
-module github.com/aimuz/git-user
+module github.com/aimuz/git-pro
 
 go 1.15
 
