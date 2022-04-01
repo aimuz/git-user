@@ -1,4 +1,4 @@
-# git-user
+# git-user[beta]
 
 git multi user management
 
