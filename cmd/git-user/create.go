@@ -19,7 +19,7 @@ func (u Users) CreateUserCommand() *cobra.Command {
 		Aliases: []string{"a"},
 		Example: createExample,
 		Short:   "create a new git user",
-		Long: `create a new git user, 
+		 Long: `create a new git user, 
 The mailbox will be used as the unique identifier`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(user.Name) == 0 || len(user.Email) == 0 {

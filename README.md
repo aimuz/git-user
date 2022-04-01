@@ -6,8 +6,8 @@ git multi user management
 
 Users with go environment
 
-```bash
-go get github.com/aimuz/git-user
+```zsh
+go install github.com/aimuz/git-user
 ```
 
 Verify installation

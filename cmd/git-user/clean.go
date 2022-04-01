@@ -48,8 +48,9 @@ func clean() {
 		var cmd *exec.Cmd
 		for _, strings := range subCmdArgs {
 			cmd = exec.Command("git", strings...)
-			_, err = cmd.CombinedOutput()
+			b, err = cmd.CombinedOutput()
 			if err != nil {
+				fmt.Println(string(b))
 				return err
 			}
 		}

@@ -40,19 +40,24 @@ func (u Users) UseUserCommand() *cobra.Command {
 			}
 			setConfig := func() error {
 				subCmdArgs := map[string][]string{
-					"user.name":  {"config", "user.name", user.Name},
-					"user.email": {"config", "user.email", user.Email},
+					"user.name":  {user.Name},
+					"user.email": {user.Email},
 				}
 				if len(user.IdentityFile) > 0 {
-					subCmdArgs["core.sshCommand"] = []string{"config", "core.sshCommand", fmt.Sprintf(`ssh -i %s`, user.IdentityFile)}
+					subCmdArgs["core.sshCommand"] = []string{fmt.Sprintf(`ssh -i %s`, user.IdentityFile)}
 				}
-				var cmd *exec.Cmd
-				for _, strings := range subCmdArgs {
-					cmd = exec.Command("git", strings...)
-					cmd.Env = os.Environ()
-					b, err = cmd.CombinedOutput()
+
+				if len(user.GPGKey) > 0 {
+					subCmdArgs["user.signingkey"] = []string{user.GPGKey}
+				}
+
+				var gitSubCmd *exec.Cmd
+				for subCmd, cmdArgs := range subCmdArgs {
+					gitSubCmd = exec.Command("git", append([]string{"config", "--local", subCmd}, cmdArgs...)...)
+					gitSubCmd.Env = os.Environ()
+					b, err = gitSubCmd.CombinedOutput()
 					if err != nil {
-						fmt.Println(b, err)
+						fmt.Println(string(b), err)
 						return err
 					}
 				}
