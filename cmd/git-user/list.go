@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"sort"
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
@@ -22,12 +23,18 @@ func (u Users) ListUserCommand() *cobra.Command {
 			w.Init(os.Stdout, 8, 8, 0, '\t', 0)
 			defer w.Flush()
 			_, _ = fmt.Fprint(w, "TITLE\tUSER\tEMAIL\tIDENTITY FILE\tGPG KEY\n")
-			for s, user := range u {
-				title := s
+			keys := make([]string, 0, len(u))
+			for key := range u {
+				keys = append(keys, key)
+			}
+			sort.Strings(keys)
+			for _, key := range keys {
+				title := key
+				user := u[key]
 				if user.Default {
 					title += "(default)"
 				}
-				_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t%s\t\n", s, user.Name, user.Email, user.IdentityFile)
+				_, _ = fmt.Fprintf(w, "%s\t%s\t%s\t%s\t%s\n", title, user.Name, user.Email, user.IdentityFile, user.GPGKey)
 			}
 			return nil
 		},
