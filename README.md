@@ -14,17 +14,17 @@ go install github.com/aimuz/git-user
 
 Verify installation
 
-```bash
+```zsh
 git user -v
 ```
 
 ## Usage
 
-```bash
+```zsh
 git user
 ```
 
-```
+```text
 git multi user management
 
 Usage:
@@ -55,7 +55,7 @@ Use "user [command] --help" for more information about a command.
 
 Help:
 
-```bash
+```zsh
 $ git user create --help 
 Usage:
  git user create [flags]
@@ -76,14 +76,14 @@ Global Flags:
       --data string    (default "$HOME/.config/git-user/user.yaml")
 ```
 
-```bash
+```zsh
 $ git user create --title example --user example --email example@example.com
 Successfully created example user
 ```
 
 ### List All Users
 
-```bash
+```zsh
 $ git user list                                                             
 TITLE   USER            EMAIL                   
 example example         example@example.com     
@@ -93,7 +93,7 @@ example example         example@example.com
 
 `git user use [title]`
 
-```bash
+```zsh
 $ git user use example 
 User set successfully
 
