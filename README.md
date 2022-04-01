@@ -1,4 +1,4 @@
-# git-user[beta] 
+# git-user[beta]
 
 > Switching identities on Git is easy, but the trouble is that different repositories may need different identities to commit and pull.
 
