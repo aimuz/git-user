@@ -49,6 +49,7 @@ func (u Users) UseUserCommand() *cobra.Command {
 
 				if len(user.GPGKey) > 0 {
 					subCmdArgs["user.signingkey"] = []string{user.GPGKey}
+					subCmdArgs["commit.gpgsign"] = []string{"true"}
 				}
 
 				var gitSubCmd *exec.Cmd
