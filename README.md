@@ -98,3 +98,11 @@ $ git user use example
 User set successfully
 
 ```
+
+## TODO
+
+- [ ] AutoEnable
+
+      Automatically enable the specified account
+- [ ] GPG support
+- [ ] SSH Identity
