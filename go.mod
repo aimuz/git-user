@@ -1,4 +1,4 @@
-module github.com/aimuz/git-pro
+module github.com/aimuz/git-user
 
 go 1.18
 
