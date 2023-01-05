@@ -9,7 +9,7 @@ git multi user management
 Users with go environment
 
 ```zsh
-go install github.com/aimuz/git-user
+go install github.com/aimuz/git-user/cmd/git-user
 ```
 
 Verify installation
