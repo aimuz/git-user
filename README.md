@@ -33,22 +33,24 @@ Usage:
 
 Examples:
  git user create --title example --user example --email example@example.com
+ git user create --title example --user example --email example@example.com -i ~/.ssh/id_rsa
  git user list
  git user use example
 
 Commands:
- git user clear       Clear current repo username and email configuration
+ git user clean       Clean current repo username and email configuration
  git user create      create a new git user
  git user help        Help about any command
  git user list        list all git users
  git user use         Switch the current repo git user
 
 Flags:
-      --data string    (default "$HOME/.config/git-user/user.yaml")
+      --data string    (default "/Users/aimuz/.config/git-user/user.yaml")
   -h, --help          help for user
   -v, --version       version for user
 
 Use "user [command] --help" for more information about a command.
+
 ```
 
 ### Create User
@@ -65,15 +67,17 @@ Aliases:
 
 Examples:
  git user create --title example --user example --email example@example.com
+ git user create --title example --user example --email example@example.com -i ~/.ssh/id_rsa
 
 Flags:
-      --email string   git user email
-  -h, --help           help for create
-      --title string   if it is empty, username will be used
-      --user string    git user name
+      --email string           git user email
+  -h, --help                   help for create
+  -i, --identity_file string   The certificate corresponding to the user. If it is blank, the default value will be used
+      --title string           if it is empty, username will be used
+      --user string            git user name
 
 Global Flags:
-      --data string    (default "$HOME/.config/git-user/user.yaml")
+      --data string    (default "/Users/aimuz/.config/git-user/user.yaml")
 ```
 
 ```zsh
@@ -85,8 +89,8 @@ Successfully created example user
 
 ```zsh
 $ git user list                                                             
-TITLE   USER            EMAIL                   
-example example         example@example.com     
+TITLE           USER            EMAIL                   IDENTITY FILE   GPG KEY  
+example         example         example@example.com     
 ```
 
 ### Switch Current Repository User
@@ -96,7 +100,6 @@ example example         example@example.com
 ```zsh
 $ git user use example 
 User set successfully
-
 ```
 
 ## TODO
@@ -104,5 +107,5 @@ User set successfully
 - [ ] AutoEnable
 
       Automatically enable the specified account
-- [ ] GPG support
+- [x] GPG support
 - [ ] SSH Identity
